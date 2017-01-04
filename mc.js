@@ -9,7 +9,7 @@ var mc = (function(){
         {
             offsetY = canvas.height / 2;
         }
-        Object.defineProperties(mc,
+        Object.defineProperties(this,
             {
                 '_ctx': {
                     value: canvas.getContext("2d"),
@@ -47,55 +47,55 @@ var mc = (function(){
     }
 
     mc.prototype.drawCoordinate = function(){
-        mc._ctx.beginPath();
+        this._ctx.beginPath();
         // X 轴
-        mc._ctx.moveTo(0, mc._canvasY - mc._offsetY);
-        mc._ctx.lineTo(mc._canvasX, mc._canvasY - mc._offsetY);
+        this._ctx.moveTo(0, this._canvasY - this._offsetY);
+        this._ctx.lineTo(this._canvasX, this._canvasY - this._offsetY);
         // X 轴箭头
-        mc._ctx.moveTo(mc._canvasX - 10, mc._canvasY - mc._offsetY - 4);
-        mc._ctx.lineTo(mc._canvasX, mc._canvasY - mc._offsetY);
-        mc._ctx.lineTo(mc._canvasX - 10, mc._canvasY - mc._offsetY + 4);
+        this._ctx.moveTo(this._canvasX - 10, this._canvasY - this._offsetY - 4);
+        this._ctx.lineTo(this._canvasX, this._canvasY - this._offsetY);
+        this._ctx.lineTo(this._canvasX - 10, this._canvasY - this._offsetY + 4);
         // Y 轴
-        mc._ctx.moveTo(mc._offsetX, 0);
-        mc._ctx.lineTo(mc._offsetX, mc._canvasY);
+        this._ctx.moveTo(this._offsetX, 0);
+        this._ctx.lineTo(this._offsetX, this._canvasY);
         // Y 轴箭头
-        mc._ctx.moveTo(mc._offsetX - 4, 10);
-        mc._ctx.lineTo(mc._offsetX, 0);
-        mc._ctx.lineTo(mc._offsetX + 4, 10);
+        this._ctx.moveTo(this._offsetX - 4, 10);
+        this._ctx.lineTo(this._offsetX, 0);
+        this._ctx.lineTo(this._offsetX + 4, 10);
 
-        mc._ctx.strokeStyle = "#000000";
-        mc._ctx.stroke();
-        mc._ctx.font = "bold 18px Courier New";
-        mc._ctx.fillText("x", mc._canvasX - 10, mc._canvasY - mc._offsetY - 10);
-        mc._ctx.fillText("y", mc._offsetX + 10, 20);
-        mc._ctx.fillText("0", mc._offsetX + 10, mc._canvasY - mc._offsetY + 20);
+        this._ctx.strokeStyle = "#000000";
+        this._ctx.stroke();
+        this._ctx.font = "bold 18px Courier New";
+        this._ctx.fillText("x", this._canvasX - 10, this._canvasY - this._offsetY - 10);
+        this._ctx.fillText("y", this._offsetX + 10, 20);
+        this._ctx.fillText("0", this._offsetX + 10, this._canvasY - this._offsetY + 20);
     }
 
     mc.prototype.drawFuncGraph = function(func, startX, endX, color = "#FF0000")
     {
-        mc._ctx.beginPath();
-        scaleX = mc._coordinateX / mc._canvasX;
-        scaleY = mc._coordinateY / mc._canvasY;
+        this._ctx.beginPath();
+        scaleX = this._coordinateX / this._canvasX;
+        scaleY = this._coordinateY / this._canvasY;
         // 把数学坐标转换为 canvas 坐标
-        start = startX / scaleX + mc._offsetX;
-        end = endX / scaleX + mc._offsetX;
+        start = startX / scaleX + this._offsetX;
+        end = endX / scaleX + this._offsetX;
 
-        startY = mc._canvasY - mc._offsetY;
+        startY = this._canvasY - this._offsetY;
 
         var funcResult;
 
         for(var x = start; x < end; x++)
         {
-            funcResult = -1 / scaleY * func(scaleX * (x - mc._offsetX)) + startY;
+            funcResult = -1 / scaleY * func(scaleX * (x - this._offsetX)) + startY;
             if(x == start)
             {
-                mc._ctx.moveTo(start, funcResult);
+                this._ctx.moveTo(start, funcResult);
                 continue;
             }
-            mc._ctx.lineTo(x, funcResult);
+            this._ctx.lineTo(x, funcResult);
         }
-        mc._ctx.strokeStyle = color;
-        mc._ctx.stroke();
+        this._ctx.strokeStyle = color;
+        this._ctx.stroke();
     }
 
     return mc;
