@@ -65,7 +65,7 @@ var mc = (function(){
 
         mc._ctx.strokeStyle = "#000000";
         mc._ctx.stroke();
-        mc._ctx.font = "bold 18px Microsoft YaHei light";
+        mc._ctx.font = "bold 18px Courier New";
         mc._ctx.fillText("x", mc._canvasX - 10, mc._canvasY - mc._offsetY - 10);
         mc._ctx.fillText("y", mc._offsetX + 10, 20);
         mc._ctx.fillText("0", mc._offsetX + 10, mc._canvasY - mc._offsetY + 20);
